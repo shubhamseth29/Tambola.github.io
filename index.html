@@ -1,0 +1,357 @@
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Seth's Tambola Number Generator</title>
+        <style>
+            @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,800,700,300);
+@import url(https://fonts.googleapis.com/css?family=Squada+One);
+            *{
+                font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+            }
+            #header{
+                font-family: 'Open Sans', sans-serif;
+  color: #555;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 25px;
+  font-weight: 40;
+  letter-spacing: -3px;
+  line-height: 1;
+  text-shadow: #EDEDED 3px 2px 0;
+  position: relative;
+}
+#header:after {
+  content:"Seth's Tambola Number Generator";
+  position: absolute;
+  left: 8px;
+  top: 32px;
+}
+#header:after {
+  /*background: url(https://subtlepatterns.com/patterns/crossed_stripes.png) repeat;*/
+  background-image: url('header.jpg');
+  background-attachment: fixed;
+                background-position: center;
+                background-size: auto;
+  -webkit-background-clip: text;
+  background-clip: content-box;
+  -webkit-text-fill-color: transparent;
+  z-index: -5;
+  display: block;
+  text-shadow: none;
+}
+            
+            .container{
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+                background-image: url('tambola3.jpeg');
+                /* background-repeat: no-repeat;  */
+                background-attachment: fixed;
+                background-position: center;
+                background-size: auto;
+                
+            }
+            #grid-container{
+                margin-top: 20px;
+                max-width: 900px;
+                width: 100%;
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
+                background-image: linear-gradient(to bottom right, red, yellow);
+               
+            }
+            .num{
+                width: 9%;
+                margin: 2px;
+                border: 1px solid #CCC;
+                display: inline-block;
+                color: #CCC;
+                font-size: 24px;
+                box-sizing: border-box;
+            }
+            .generated{
+                border-color:red;
+                color: red;
+                background-color:pink;
+            }
+
+            #generator-container{
+                border:1px solid rgb(136, 136, 136);
+                display: block;
+                position: fixed;
+                left: 20px;
+                top: 80px;
+                padding: 20px;
+                text-align: center;
+                box-sizing: border-box;
+                background-color: rgb(255, 255, 255);
+            }
+
+            #number{
+                font-size: 36px;
+                text-align: center;
+                color: rgb(255, 0, 0);
+                font-weight: bold;
+                margin-top: 40px;
+                display: inline-block;
+                background-color:pink;
+                padding: 20px;
+                border-radius: 10px;
+                border:1px solid pink;
+            }
+
+            #btn-generate{
+                display:inline-block;
+                padding:0.46em 1.6em;
+                border:0.1em solid #000000;
+                margin:0 0.2em 0.2em 0;
+                border-radius:0.12em;
+                box-sizing: border-box;
+                text-decoration:none;
+                font-family:'Roboto',sans-serif;
+                font-weight:300;
+                color:#000000;
+                text-shadow: 0 0.04em 0.04em rgba(0,0,0,0.35);
+                background-color:#FFFFFF;
+                text-align:center;
+                transition: all 0.15s;
+            }
+            #btn-generate:active{
+                position: relative;
+                left: 1;
+                top: 1;
+            }
+
+            #banner-container{
+                border:1px solid #888;
+                display: block;
+                position: fixed;
+                right: 20px;
+                top: 80px;
+                padding: 20px;
+                text-align: center;
+                box-sizing: border-box;
+                background-color: #FFF;
+            }
+
+            #footer{
+                font-size: 12px;
+                text-align: center;
+                margin-top: 20px;
+                margin-bottom: 20px;
+                color: #888;
+            }
+
+            a:link, a:visited{
+                color: blue;
+                text-decoration: none;
+            }
+
+            a:hover{
+                color: red;
+            }
+
+            #um-banner{
+                margin-top: 15px;
+                border-top: 1px solid #888; 
+                padding-top: 15px;
+            }
+
+            @media screen and (min-width: 350px) and (max-width: 799px) {
+                #hv-banner{
+                    display: inline-block;
+                    vertical-align: top;
+                }
+                #um-banner{
+                    display: inline-block;
+                    padding-top: 0;
+                    margin-top: 0;
+                    border-top: none;
+                    margin-left: 30px;
+                    vertical-align: top;
+                }
+            }
+
+            @media screen and (max-width: 799px) {
+                .container{
+                    width: 100%;
+                }
+
+                #generator-container{
+                    position: relative;
+                    left: 0;
+                    top: 0;
+                    display: block;
+                }
+
+                #banner-container{
+                    position: relative;
+                    left: 0;
+                    top: 0;
+                    display: block;
+                    margin-top: 20px;
+                    border: none;
+                }
+
+                #grid-container{
+                    width: 100%;
+                }
+
+                .num{
+                    padding: 2px;
+                    font-size: 14px;
+                    margin: 1px;
+                }
+            }
+
+            @media screen and (min-width: 800px) and (max-width: 1300px){
+                #grid-container{
+                    width: 600px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container" >
+            <div id="header">
+                <h1>Seth's Tambola Number Generator</h1>
+            </div>
+           
+
+            <div id="generator-container" style="background-image: url('bg.jpg');">
+                    <input type="button" value="Lucky Digit" id="btn-generate" onclick="generateNum()">
+                    <Br>
+                    <div id="number">&nbsp;&nbsp;</div>
+                </div>
+
+            <div id="grid-container" ></div>
+        </div>
+        <div id="banner-container">
+            <div>
+                <div id="hv-banner">
+                    <a href="https://www.instagram.com/seth.ugh/">
+                        <img src="pic.jpg" width="64" height="64" alt="Shubham's Instagram" border="0">
+                        <div style="margin-top:15px; margin-bottom: 15px;">
+                        
+                        </div>
+                        Follow me on<br>Instagram.<br>Enjoy!
+                    </a>
+                </div>
+
+                <!-- <div id="um-banner">
+                    <a href="https://www.uconomix.com/Products/uMark/Default.aspx">
+                        <img src="https://www.uconomix.com/Images/uMark-128.png" width="64" height="64" alt="uMark Batch Photo Watermark" border="0">
+                        <div style="margin-top:10px; margin-bottom: 10px;">
+                        <img src="https://www.uconomix.com/Images/uMark_name.gif" width="120" height="42" alt="uMark Batch Photo Watermark" border="0">
+                        </div>
+                        Bulk Watermark<br>Your Photos
+                    </a>
+                </div> -->
+            </div>
+        </div>
+        <div id="footer">
+            Created by <b><i>SHUBHAM SETH</i></b>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script>
+            (function($){
+                $.fn.extend({
+                    numAnim: function(options) {
+                        if ( ! this.length)
+                            return false;
+
+                        this.defaults = {
+                            endAt: 90,
+                            numClass: 'autogen-num',
+                            duration: 0.5,   // seconds
+                            interval: 25  // ms
+                        };
+                        var settings = $.extend({}, this.defaults, options);
+
+                        var $num = $('<span/>', {
+                            'class': settings.numClass 
+                        });
+
+                        return this.each(function() {
+                            var $this = $(this);
+
+                            // Wrap each number in a tag.
+                            var frag = document.createDocumentFragment(),
+                                numLen = settings.endAt.toString().length;
+                            for (x = 0; x < numLen; x++) {
+                                var rand_num = Math.floor( Math.random() * 10 );
+                                frag.appendChild( $num.clone().text(rand_num)[0] )
+                            }
+                            $this.empty().append(frag);
+
+                            var get_next_num = function(num) {
+                                ++num;
+                                if (num > 9) return 0;
+                                return num;
+                            };
+
+                            // Iterate each number.
+                            $this.find('.' + settings.numClass).each(function() {
+                                var $num = $(this),
+                                    num = parseInt( $num.text() );
+
+                                var interval = setInterval( function() {
+                                    num = get_next_num(num);
+                                    $num.text(num);
+                                }, settings.interval);
+
+                                setTimeout( function() {
+                                    clearInterval(interval);
+                                }, settings.duration * 1000 - settings.interval);
+                            });
+
+                            setTimeout( function() {
+                                $this.text( settings.endAt.toString() );
+                                $("#num-" + settings.endAt).addClass("generated");
+                                generated_numbers.push(settings.endAt);
+                            }, settings.duration * 1000);
+                        });
+                    }
+                });
+            })(jQuery);
+
+            var generated_numbers = [];
+
+            $(function(){
+                for(i=1; i<=90; i++){
+                    $("<div />").addClass("num").html(i).attr("id","num-" + i).appendTo("#grid-container");
+                }
+
+                var cw = $('.num').width();
+                $('.num').css({'height':cw+'px','line-height':cw+'px'});
+            });
+
+            function generateNum(){
+                if(generated_numbers.length == 90){
+                    alert("Full House!");
+                    return;
+                }
+                while(true){
+                    var i = getRandomInt(1, 90);
+                    if($.inArray(i, generated_numbers) == -1){
+                        //$("#number").html(i);
+                        $("#number").numAnim({
+                            endAt: i
+                        });
+                        //$("#num-" + i).addClass("generated");
+                        //generated_numbers.push(i);
+                        //setTimeout("generateNum()",200);
+                        break;
+                    }
+                }
+            }
+
+            function getRandomInt(min, max) {
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+        </script>
+    </body>
+</html>
